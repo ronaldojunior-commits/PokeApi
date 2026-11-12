@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#392b83">
+    <title>Pokémon Football League</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="topo">
+        <div class="topo-conteudo">
+            <a href="#" class="logo">
+                <span class="logo-bola">⚽</span>
+                Pokémon <strong>Football League</strong>
+            </a>
+
+            <nav class="navegacao">
+                <a href="#pokedex">Pokédex</a>
+                <a href="#futebol">Futebol</a>
+                <a href="#favoritos">Favoritos</a>
+                <a href="#comparacao">Comparação</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="apresentacao">
+            <span class="etiqueta">A ARENA DOS ATRIBUTOS</span>
+            <h1>Pokémon Football League</h1>
+            <p>
+                Explore Pokémon, monte seus times, compare atributos
+                e descubra quem domina o campo!
+            </p>
+        </section>
+
+        <section id="pokedex" class="secao">
+
+            <div class="titulo-secao">
+                <div>
+                    <span class="subtitulo">EXPLORE A POKÉAPI</span>
+                    <h2>Sua Pokédex</h2>
+                    <p>Pesquise, descubra e conheça seus Pokémon favoritos.</p>
+                </div>
+                <span id="total-pokemon" class="contador">Carregando...</span>
+            </div>
+
+            <div class="layout-pokedex">
+
+                <div class="coluna-principal">
+
+                    <article class="cartao pesquisa-cartao">
+                        <h3>Encontre seu Pokémon</h3>
+
+                        <form id="form-pesquisa" class="barra-pesquisa">
+                            <input
+                                type="text"
+                                id="campo-pesquisa"
+                                placeholder="Ex.: pikachu ou 25"
+                                autocomplete="off"
+                            >
+                            <button type="submit" class="botao botao-principal">
+                                Pesquisar
+                            </button>
+                            <button type="button" id="botao-aleatorio" class="botao botao-secundario">
+                                ↗ Aleatório
+                            </button>
+                        </form>
+
+                        <p id="mensagem-pesquisa" class="texto-auxiliar">
+                            Pesquise por nome ou número da Pokédex.
+                        </p>
+                    </article>
+
+                    <article class="cartao catalogo-cartao">
+                        <div class="catalogo-cabecalho">
+                            <div>
+                                <h3>Catálogo de Pokémon</h3>
+                                <p>Selecione um cartão para ver os detalhes.</p>
+                            </div>
+                        </div>
+
+                        <div class="filtros" id="filtros-tipo">
+                            <button class="filtro ativo" data-tipo="todos">Todos</button>
+                            <button class="filtro" data-tipo="fire">Fogo</button>
+                            <button class="filtro" data-tipo="water">Água</button>
+                            <button class="filtro" data-tipo="grass">Planta</button>
+                            <button class="filtro" data-tipo="electric">Elétrico</button>
+                            <button class="filtro" data-tipo="psychic">Psíquico</button>
+                        </div>
+
+                        <div id="grade-pokemon" class="grade-pokemon">
+                            <div class="estado-vazio">Carregando Pokémon...</div>
+                        </div>
+
+                        <div class="paginacao">
+                            <button id="pagina-anterior" class="botao botao-secundario" disabled>
+                                ← Anterior
+                            </button>
+
+                            <span id="indicador-pagina">Página 1</span>
+
+                            <button id="pagina-proxima" class="botao botao-secundario">
+                                Próximo →
+                            </button>
+                        </div>
+                    </article>
+
+                </div>
+
+                <aside class="coluna-lateral">
+
+                    <article class="cartao detalhes-cartao" id="painel-detalhes">
+                        <h3>Ficha do Pokémon</h3>
+                        <p class="texto-auxiliar">
+                            Selecione um Pokémon no catálogo para conhecer seus detalhes.
+                        </p>
+                    </article>
+
+                    <article class="cartao" id="favoritos">
+                        <div class="cartao-titulo-linha">
+                            <h3>Favoritos ☆</h3>
+                            <span id="quantidade-favoritos" class="contador-pequeno">0</span>
+                        </div>
+                        <div id="lista-favoritos">
+                            <p class="texto-auxiliar">Nenhum favorito salvo ainda.</p>
+                        </div>
+                    </article>
+
+                    <article class="cartao" id="comparacao">
+                        <h3>Comparar lado a lado</h3>
+                        <p class="texto-auxiliar">
+                            Escolha até dois Pokémon usando o botão de comparação
+                            na ficha de detalhes.
+                        </p>
+                        <div id="painel-comparacao">
+                            <p class="texto-auxiliar">Selecione dois Pokémon para comparar.</p>
+                        </div>
+                        <button id="limpar-comparacao" class="botao botao-secundario botao-largo">
+                            Limpar comparação
+                        </button>
+                    </article>
+
+                </aside>
+            </div>
+        </section>
+
+        <section id="futebol" class="secao">
+
+            <div class="titulo-secao">
+                <div>
+                    <span class="subtitulo">A DISPUTA COMEÇA AQUI</span>
+                    <h2>Estádio Pokémon</h2>
+                    <p>Escolha dois Pokémon e dispute cinco critérios.</p>
+                </div>
+                <span class="contador">5 atributos</span>
+            </div>
+
+            <div class="selecao-times">
+
+                <article class="cartao time-cartao time-azul">
+                    <label for="pokemon-one">TIME AZUL</label>
+                    <select id="pokemon-one"></select>
+
+                    <div class="identidade-time">
+                        <img id="imagem-one" src="" alt="Pokémon do time azul">
+                        <div>
+                            <h3 id="nome-one">Carregando...</h3>
+                            <span id="tipo-one" class="tipo-etiqueta"></span>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="versus">VS</div>
+
+                <article class="cartao time-cartao time-roxo">
+                    <label for="pokemon-two">TIME ROXO</label>
+                    <select id="pokemon-two"></select>
+
+                    <div class="identidade-time">
+                        <img id="imagem-two" src="" alt="Pokémon do time roxo">
+                        <div>
+                            <h3 id="nome-two">Carregando...</h3>
+                            <span id="tipo-two" class="tipo-etiqueta"></span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <article class="cartao painel-partida">
+
+                <div class="cabecalho-partida">
+                    <h3>A partida</h3>
+                    <span id="status-partida" class="status-partida">Pronto para jogar</span>
+                </div>
+
+                <div class="placar">
+                    <span id="placar-nome-one">Time azul</span>
+                    <strong id="placar-one">0</strong>
+                    <span class="separador-placar">×</span>
+                    <strong id="placar-two">0</strong>
+                    <span id="placar-nome-two">Time roxo</span>
+                </div>
+
+                <div class="campo" id="campo">
+
+                    <div class="linha-meio"></div>
+                    <div class="circulo-meio"></div>
+                    <div class="gol gol-esquerdo"></div>
+                    <div class="gol gol-direito"></div>
+
+                    <div class="jogador jogador-one">
+                        <div class="jogador-imagem">
+                            <img id="campo-imagem-one" src="" alt="">
+                        </div>
+                        <span id="campo-nome-one"></span>
+                    </div>
+
+                    <div class="jogador jogador-two">
+                        <div class="jogador-imagem">
+                            <img id="campo-imagem-two" src="" alt="">
+                        </div>
+                        <span id="campo-nome-two"></span>
+                    </div>
+
+                    <div id="bola" class="bola">⚽</div>
+                    <div id="aviso-gol" class="aviso-gol">GOL!</div>
+
+                </div>
+
+                <p id="comentario-partida" class="comentario-partida">
+                    Escolha seus times e inicie a partida.
+                </p>
+
+                <div class="barra-progresso">
+                    <div id="progresso-partida"></div>
+                </div>
+
+                <div class="botoes-partida">
+                    <button id="iniciar-partida" class="botao botao-principal">
+                        Iniciar partida
+                    </button>
+                    <button id="reiniciar-partida" class="botao botao-secundario">
+                        Reiniciar partida
+                    </button>
+                </div>
+
+                <div id="resultado-partida" class="resultado-partida" hidden></div>
+
+            </article>
+
+            <article class="cartao atributos-cartao">
+                <div class="cabecalho-partida">
+                    <h3>Comparação de atributos</h3>
+                    <span class="contador">Maior valor vence</span>
+                </div>
+
+                <div class="tabela-responsiva">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Critério</th>
+                                <th id="tabela-nome-one">Time azul</th>
+                                <th id="tabela-nome-two">Time roxo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-atributos"></tbody>
+                    </table>
+                </div>
+            </article>
+
+        </section>
+
+        <footer class="rodape">
+            Pokémon Football League · Dados fornecidos pela PokéAPI.
+        </footer>
+
+    </main>
+
+    <div id="notificacao" class="notificacao" role="status"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
