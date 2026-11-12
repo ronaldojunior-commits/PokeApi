@@ -1,3 +1,4 @@
+
 // ==========================================
 // CONFIGURAÇÕES E ELEMENTOS
 // ==========================================
@@ -90,7 +91,7 @@ let quadroAnimacao = null;
 let identificadorAnimacao = 0;
 
 // ==========================================
-// API GATEWAY E CACHE
+// API E CACHE
 // ==========================================
 
 async function consultarAPI(caminho) {
@@ -212,8 +213,27 @@ function converterAltura(valor) {
 }
 
 // ==========================================
-// CATÁLOGO E PAGINAÇÃO
+// SOM DA TORCIDA
 // ==========================================
+
+const somTorcida = new Audio("./torcida.mp3");
+
+somTorcida.volume = 0.8;
+
+function tocarTorcida() {
+    somTorcida.pause();
+    somTorcida.currentTime = 0;
+
+    somTorcida.play().then(() => {
+        setTimeout(() => {
+            somTorcida.pause();
+            somTorcida.currentTime = 0;
+        }, 5000);
+    }).catch(erro => {
+        console.log("Erro ao reproduzir o áudio:", erro);
+    });
+}
+
 
 async function carregarListaCatalogo() {
     elementos.grade.innerHTML = '<div class="estado-vazio">Carregando Pokédex...</div>';
@@ -732,9 +752,6 @@ function atualizarComparacao() {
     `).join("");
 
     if (comparacao.length === 2) {
-        const a = obterAtributos(comparacao[0]);
-        const b = obterAtributos(comparacao[1]);
-
         html += `
             <div class="tabela-responsiva">
                 <table class="comparacao-tabela">
@@ -1270,12 +1287,16 @@ function jogarRodada() {
             golsAzul++;
 
             document.getElementById("placar-one").textContent = golsAzul;
+
+            tocarTorcida();
         }
 
         if (vencedor === "two") {
             golsRoxo++;
 
             document.getElementById("placar-two").textContent = golsRoxo;
+
+            tocarTorcida();
         }
 
         atualizarProgresso();
