@@ -216,13 +216,32 @@ function converterAltura(valor) {
 // SOM DA TORCIDA
 // ==========================================
 
+// ==========================================
+// SOM DA TORCIDA
+// ==========================================
+
 const somTorcida = new Audio("./torcida.mp3");
 
 somTorcida.volume = 0.8;
+somTorcida.preload = "auto";
+
+function desbloquearAudio() {
+    somTorcida.muted = true;
+
+    somTorcida.play().then(() => {
+        somTorcida.pause();
+        somTorcida.currentTime = 0;
+        somTorcida.muted = false;
+    }).catch(erro => {
+        somTorcida.muted = false;
+        console.log("Erro ao desbloquear áudio:", erro);
+    });
+}
 
 function tocarTorcida() {
     somTorcida.pause();
     somTorcida.currentTime = 0;
+    somTorcida.muted = false;
 
     somTorcida.play().then(() => {
         setTimeout(() => {
@@ -1358,7 +1377,10 @@ document.getElementById("pokemon-one").addEventListener("change", atualizarTimes
 
 document.getElementById("pokemon-two").addEventListener("change", atualizarTimes);
 
-document.getElementById("iniciar-partida").addEventListener("click", iniciarPartida);
+document.getElementById("iniciar-partida").addEventListener("click", () => {
+    desbloquearAudio();
+    iniciarPartida();
+});
 
 document.getElementById("reiniciar-partida").addEventListener("click", () => {
     reiniciarPartida();
